@@ -53,6 +53,34 @@
 					<p>Opera defines the concept of a "place" to be an area in the code where the result of an expression resides.</p>
 					<p>To define a place, use the <code>@ TYPE NAME</code> prefix operation.</p>
 					<hr></hr>
+					<p>A key tool which should be used to the biggest extent is the macro operation.</p>
+					<p>The macro operator is denoted like this: <code>= PATTERN EXPR</code> where the pattern is a special kind of token group.</p>
+					<p>Inside the pattern, there can be a multitude of "arguments" denoted as <code>$ NAME</code> they serve as a generic slot for expressions to be put into them.</p>
+					<p>Inside of the macro expression (<code>EXPR</code>), there can be references to the names of the arguments in the pattern. When the macro is used, the expressions which are in place of the arguments will be put in place of the references.</p>
+					<p>Examples:</p>
+					<ul>
+						<li>Simple constant macro:</li>
+						<pre><code>= FLOAT_BITS 32;</code></pre>
+						<li>Incrementer:</li>
+						<pre><code>= (inc $A) ($A++);</code></pre>
+						<li>C-like if-else statement definition:</li>
+						<pre><code>= (
+	if($condition)
+	{
+		$on_true
+	}
+	else
+	{
+		$on_false
+	}
+)
+(
+	$condition ? $on_true : $on_false
+)</code></pre>
+						<li>Minified C-like if-else statement definition:</li>
+						<pre><code>=(if($A){$B}else{$C})($A?$B:$C)</code></pre>
+					</ul>
+					<hr></hr>
 					<p>This article is a work in progress. Bookmark it and expect changes!</p>
 				</td>
 			<tr>
