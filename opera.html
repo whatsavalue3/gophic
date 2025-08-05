@@ -81,6 +81,50 @@
 						<pre><code>=(if($A){$B}else{$C})($A?$B:$C)</code></pre>
 					</ul>
 					<hr></hr>
+					<p>To get the type of an expression, you can use the <code>^ EXPR</code> prefix operator.</p>
+					<hr></hr>
+					<p>Operator precedence</p>
+					<ol>
+						<li><code>()</code> <code>{}</code></li>
+						<li><code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code></li>
+						<li><code>*</code> <code>/</code></li>
+						<li><code>+</code> <code>-</code></li>
+						<li><code>&lt;</code> <code>&lt;=</code> <code>==</code> <code>&gt;=</code> <code>&gt;</code></li>
+						<li><code>?:</code></li>
+						<li><code>;</code></li>
+					</ol>
+					<hr></hr>
+					<p>The group operator <code>$ NAME GROUPDEF</code> is used to define a new type.</p>
+					<p>The group definition is an expression.</p>
+					<p>It can take many forms such as:</p>
+					<ul>
+						<li>A type.</li>
+						<li>An expression that evaluates to a type.</li>
+						<li>A scope with macros and/or places.</li>
+					</ul>
+					<p>Places can use the group types to add new features and operations to them.</p>
+					<p>Examples:</p>
+					<ul>
+						<li>C-like <code>float</code> type:</li>
+						<pre><code>$ float %32;</code></pre>
+						<li>Conditional integer type:</li>
+						<pre><code>= CPU_BITS 16;
+$ fast_int (CPU_BITS &lt; 16 ? #8 : #16);</code></pre>
+						<li>Sizeless, purely macro type:</li>
+						<pre><code>$ Foo
+{
+	= PrintName (writeln("Foo"));
+	= (AddName($A)) ($A+"Foo");
+};
+
+$ Bar
+{
+	= PrintName (writeln("Bar"));
+	= (AddName($A)) ($A+"Bar");
+};
+</code></pre>
+					</ul>
+					<hr></hr>
 					<p>This article is a work in progress. Bookmark it and expect changes!</p>
 				</td>
 			<tr>
