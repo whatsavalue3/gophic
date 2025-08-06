@@ -122,8 +122,16 @@ $ Bar
 	= PrintName (writeln("Bar"));
 	= (AddName($A)) ($A+"Bar");
 };
+
+= (NamePrinter($to_print))
+{
+	to_print.PrintName;
+};
 </code></pre>
 					</ul>
+					<hr></hr>
+					<p>A function is defined with the <code>&amp; TYPE? NAME (ARGS?) EXPR</code> operator.</p>
+					<p></p>
 					<hr></hr>
 					<p>This article is a work in progress. Bookmark it and expect changes!</p>
 				</td>
