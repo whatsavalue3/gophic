@@ -114,7 +114,7 @@ $ fast_int (CPU_BITS &lt; 16 ? #8 : #16);</code></pre>
 						<pre><code>$ Foo
 {
 	= PrintName (writeln("Foo"));
-	= (AddName($A)) ($A+"Foo");
+	= (AddName($A)) (writeln($A+"Foo"));
 };
 
 $ Bar
@@ -128,10 +128,61 @@ $ Bar
 	to_print.PrintName;
 };
 </code></pre>
+					<li>Tuple example:</li>
+					<pre><code>
+					// Opera tuple mockup
+// New operators
+// ^ Prefix			"Expression" variable, compile time, typeless.
+// | Prefix			"Length" of an expression. For types it is the size in bytes. For lists, its the count of items.
+// Postfix !		Returns an expression. Exits the topmost known scope.
+// Infix @ Infix		Casts the left expression to the right type.
+
+
+= (GetTypesSize($TYPES))
+{
+	^ Result = 0;
+	^ i = 0;
+	_Loop:
+		(i >= |TYPES) ?
+		{
+			Result!
+		}
+		Result = Result + |(TYPES[i]);
+		i++;
+	_Loop;
+}
+
+= (Tuple($TYPES...,))
+{
+	$ _
+	{
+		@#8[GetTypesSize(TYPES)] _data;
+		
+		= ([$INDEX])
+		{
+			^ Acc = 0;
+			^ i = 0;
+			_Loop:
+				(i >= INDEX) ?
+				{
+					(_data + Acc)@(TYPES[INDEX])!
+				}
+				:
+				{
+					Acc = Acc + |(TYPES[i]);
+					i++;
+				};
+			_Loop;
+		}
+	}
+}
+
+$ int3 Tuple(#32, #32, #32);
+$ float3 Tuple(%32, %32, %32);
+</pre></code>
 					</ul>
 					<hr></hr>
 					<p>A function is defined with the <code>&amp; TYPE? NAME (ARGS?) EXPR</code> operator.</p>
-					<p></p>
 					<hr></hr>
 					<p>This article is a work in progress. Bookmark it and expect changes!</p>
 				</td>
